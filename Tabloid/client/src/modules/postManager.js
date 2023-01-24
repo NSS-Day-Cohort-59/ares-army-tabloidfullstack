@@ -1,6 +1,5 @@
-const _apiUrl = "/api/post";
+const baseUrl = "/api/post";
 
 export const getAllPosts = () => {
-    return fetch(baseUrl)
-    .then((res) => res.json())
+    return fetch(baseUrl).then((res) => res.json())
 };

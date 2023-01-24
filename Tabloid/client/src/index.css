@@ -16,3 +16,10 @@ p {
 .post p {
     white-space: pre-wrap;
 }
+
+
+.post_list_header {
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+}
