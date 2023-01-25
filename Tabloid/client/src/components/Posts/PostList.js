@@ -1,4 +1,4 @@
-import { getAllPosts } from "../../modules/PostManager";
+import { getAllPosts } from "../../modules/postManager";
 import React, { useEffect, useState } from "react";
 import { Card } from "reactstrap";
 
