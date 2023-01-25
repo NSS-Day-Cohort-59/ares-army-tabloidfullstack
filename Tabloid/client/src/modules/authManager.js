@@ -1,5 +1,6 @@
 import firebase from "firebase/app";
 import "firebase/auth";
+import { Navigate } from "react-router-dom";
 
 const _apiUrl = "/api/userprofile";
 
@@ -49,15 +50,16 @@ export const login = (email, pw) => {
 
 
 export const logout = () => {
-  firebase.auth().signOut()
+  firebase.auth().signOut();
+
 };
 
 
 export const register = (userProfile, password) => {
   return firebase.auth().createUserWithEmailAndPassword(userProfile.email, password)
-    .then((createResponse) => _saveUser({ 
-      ...userProfile, 
-      firebaseUserId: createResponse.user.uid 
+    .then((createResponse) => _saveUser({
+      ...userProfile,
+      firebaseUserId: createResponse.user.uid
     }));
 };
 

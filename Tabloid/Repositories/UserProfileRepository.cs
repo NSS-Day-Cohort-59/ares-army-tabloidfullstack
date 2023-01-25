@@ -1,6 +1,10 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Configuration;
+using System.Collections.Generic;
 using Tabloid.Models;
 using Tabloid.Utils;
+using System.Linq;
+
 
 namespace Tabloid.Repositories
 {
@@ -52,6 +56,52 @@ namespace Tabloid.Repositories
 
                     return userProfile;
                 }
+            }
+        }
+
+        public List<UserProfile> GetAllUsers()
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                    SELECT u.Id AS UserId, u.FirstName, u.LastName, u.DisplayName, u.UserTypeId,
+		                ut.Id AS TypeId, ut.Name AS TypeName
+                    FROM UserProfile u
+                    JOIN UserType ut ON ut.Id = u.UserTypeId
+                    ORDER BY FirstName  
+                    ;";
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        var users = new List<UserProfile>();
+
+                        while (reader.Read())
+                        {
+                            var userId = DbUtils.GetInt(reader, "UserId");
+
+
+                            users.Add(new UserProfile()
+                            {
+                                Id = userId,
+                                FirstName = DbUtils.GetString(reader, "FirstName"),
+                                LastName = DbUtils.GetString(reader, "LastName"),
+                                DisplayName = DbUtils.GetString(reader, "DisplayName"),
+                                UserTypeId = DbUtils.GetInt(reader, "UserTypeId"),
+                                UserType = new UserType()
+                                    {
+                                        Id = DbUtils.GetInt(reader, "TypeId"),
+                                        Name = DbUtils.GetString(reader, "TypeName")
+                                    }
+                            }) ;
+                            }
+                        
+                        return users;
+                    }
+                }
+
             }
         }
 
