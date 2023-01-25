@@ -10,6 +10,8 @@ import {
   NavLink
 } from 'reactstrap';
 import { logout } from '../modules/authManager';
+import { UserList } from './UserList';
+
 
 export default function Header({ isLoggedIn }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -24,16 +26,22 @@ export default function Header({ isLoggedIn }) {
           <Nav className="mr-auto" navbar>
             { /* When isLoggedIn === true, we will render the Home link */}
             {isLoggedIn &&
-              <div>
+              <>
+                <>
+                  <NavItem>
+                    <NavLink tag={RRNavLink} to="/">Home</NavLink>
+                  </NavItem>
+                  <NavItem>
+                    <NavLink tag={RRNavLink} to="/tag">Tag Management</NavLink>
+                  </NavItem>
+                </>
                 <NavItem>
-                  <NavLink tag={RRNavLink} to="/">Home</NavLink>
+                  <NavLink tag={RRNavLink} to="/userList">UserList</NavLink>
                 </NavItem>
-                <NavItem>
-                  <NavLink tag={RRNavLink} to="/tag">Tag Management</NavLink>
-                </NavItem>
-              </div>
+              </>
             }
           </Nav>
+
           <Nav navbar>
             {isLoggedIn &&
               <>
@@ -47,6 +55,7 @@ export default function Header({ isLoggedIn }) {
                 <NavItem>
                   <NavLink tag={RRNavLink} to="/login">Login</NavLink>
                 </NavItem>
+
                 <NavItem>
                   <NavLink tag={RRNavLink} to="/register">Register</NavLink>
                 </NavItem>
