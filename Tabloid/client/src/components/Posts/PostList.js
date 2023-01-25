@@ -15,11 +15,13 @@ const PostList = () => {
 
     return (
         <div className="post-container">
-            <div className="post_list_header"><div>Author</div><div>Title</div><div>Category</div></div>
+            <div className="post_list_header"><div className="post-left">Author</div><div className="post-center">Title</div><div className="post-right">Category</div></div>
             <div className="row justify-content-center">
-            {posts.map((post) => { return <Card><div className="post_elements">{post.userProfile.fullName}</div>
-            <div className="post_elements"> {post.title}</div>
-            <div className="post_elements"> {post.categoryId} </div></Card> })}
+            {posts.map((post) => { return <Card><div className="post-list-container">
+                <div className="post_elements post-left">{post.userProfile.fullName}</div>
+            <div className="post_elements post-center"> {post.title}</div>
+            <div className="post_elements post-right"> {post.categoryId} </div>
+            </div></Card> })}
             </div>
         </div>
     )
