@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using Tabloid.Models;
 using Tabloid.Utils;
+using System;
 
 namespace Tabloid.Repositories
 {
@@ -39,6 +40,38 @@ namespace Tabloid.Repositories
                 }
             }
         }
+
+        public Post GetPostById(int id)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @" 
+                        SELECT p.Id, Title, Content, p.ImageLocation, p.CreateDateTime, PublishDateTime, IsApproved, CategoryId, UserProfileId,
+                               up.Id, FirebaseUserId, DisplayName, FirstName, LastName, Email, up.CreateDateTime, up.ImageLocation, UserTypeId,
+                               c.Id, Name
+                        FROM Post p
+                        LEFT JOIN UserProfile up ON up.Id = p.UserProfileId
+                        LEFT JOIN Category c ON c.Id = p.CategoryId
+                        WHERE IsApproved = 1 AND PublishDateTime < SYSDATETIME()
+                        AND p.Id = @id";
+
+                    cmd.Parameters.AddWithValue("@id", id);
+                    var reader = cmd.ExecuteReader();
+
+                    Post post = null; 
+                    if (reader.Read())
+                    {
+                        post = NewPostFromReader(reader);
+                    }
+                    reader.Close();
+                    return post;
+                }
+            }
+        }
+
 
         private Post NewPostFromReader(SqlDataReader reader)
         {
