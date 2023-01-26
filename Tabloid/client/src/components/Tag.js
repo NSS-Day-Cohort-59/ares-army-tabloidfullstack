@@ -3,11 +3,11 @@ import { Card } from "reactstrap";
 
 const Tag = ({ tag }) => {
     return (
-        <Card >
-            <div>
+        <>
+            <div className="mb-3">
                 <strong>{tag.name}</strong>
             </div>
-        </Card>
+        </>
     );
 };
 
