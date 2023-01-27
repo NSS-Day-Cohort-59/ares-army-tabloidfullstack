@@ -20,3 +20,22 @@ export const getAllUsers = () => {
         });
     });
 };
+
+export const getUserById = (id) => {
+    return getToken().then((token) => {
+        return fetch(`/Details/${id}`, {
+            method: "GET",
+            headers: {
+                Authorization: `Bearer ${token}`
+            },
+        }).then((resp) => {
+            if (resp.ok) {
+                return resp.json();
+            } else {
+                throw new Error(
+                    "An error has occured while trying to fetch this user."
+                );
+            }
+        });
+    });
+};
