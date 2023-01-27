@@ -3,9 +3,9 @@ using Tabloid.Models;
 
 namespace Tabloid.Repositories
 {
-    public interface ITagRepository
+    public interface IPostRepository
     {
-        List<Tag> GetAll();
-        public void Add(Tag tag);
+        List<Post> GetAllPosts();
+        Post GetPostById(int id);
     }
 }

@@ -16,3 +16,20 @@ p {
 .post p {
     white-space: pre-wrap;
 }
+
+.post_list_header {
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+}
+
+.post-list-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+
+
+.post-left,.post-center,.post-right {
+flex-basis: 33%;
+}

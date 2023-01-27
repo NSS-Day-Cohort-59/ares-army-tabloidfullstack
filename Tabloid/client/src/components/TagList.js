@@ -15,6 +15,7 @@ const TagList = () => {
 
     return (
         <div className="container">
+            <a href="/tagform" class="btn btn-dark active mb-3" role="button">Create Tag</a>
             <div className="row justify-content-center">
                 {tags.map((tag) => (
                     <Tag tag={tag} key={tag.id} />
