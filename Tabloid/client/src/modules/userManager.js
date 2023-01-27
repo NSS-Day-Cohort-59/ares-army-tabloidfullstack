@@ -21,9 +21,9 @@ export const getAllUsers = () => {
     });
 };
 
-export const getUserById = (Id) => {
+export const getUserById = (id) => {
     return getToken().then((token) => {
-        return fetch(`${apiUrl}/${Id}`, {
+        return fetch(`/Details/${id}`, {
             method: "GET",
             headers: {
                 Authorization: `Bearer ${token}`

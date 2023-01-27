@@ -5,7 +5,7 @@ import Register from "./Register";
 import Hello from "./Hello";
 import TagList from "./TagList";
 import { UserList } from "./UserList";
-import { ViewUserDetails } from "./UserDetails";
+import { UserDetails } from "./UserDetails";
 
 export default function ApplicationViews({ isLoggedIn }) {
   return (
@@ -22,8 +22,8 @@ export default function ApplicationViews({ isLoggedIn }) {
             element={isLoggedIn ? <UserList /> : <Navigate to="/UserList" />}
           />
           <Route
-            path="UserDetails"
-            element={isLoggedIn ? <ViewUserDetails /> : <Navigate to="/UserDetails" />}
+            path="Details/:id"
+            element={isLoggedIn ? <UserDetails /> : <Navigate to="/Details/:id" />}
           />
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />

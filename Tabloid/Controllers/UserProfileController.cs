@@ -6,7 +6,7 @@ using Tabloid.Repositories;
 
 namespace Tabloid.Controllers
 {
-    [Authorize]
+    
     [Route("api/[controller]")]
     [ApiController]
     public class UserProfileController : ControllerBase
@@ -23,7 +23,7 @@ namespace Tabloid.Controllers
             return Ok(_userProfileRepository.GetByFirebaseUserId(firebaseUserId));
         }
 
-        [HttpGet("/Details/{Id}")]
+        [HttpGet("/Details/{id}")]
         public IActionResult GetUserDetails(int id)
         {
             return Ok(_userProfileRepository.GetUserById(id));

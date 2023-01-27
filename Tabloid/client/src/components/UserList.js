@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { Card, CardBody } from "reactstrap";
 import { getAllUsers } from "../modules/userManager";
 import User from "./User";
@@ -13,6 +13,7 @@ export const UserList = () => {
         getAllUsers().then(setUsers)
     }, []);
 
+
     return (<section>
         <h2>All Users</h2>
         {
@@ -20,10 +21,11 @@ export const UserList = () => {
                 <div>
 
                     <User key={u.id} user={u} />
+                    <Link to={`/Details/${u.id}`}>Details</Link>
                 </div>
 
             ))
         }
 
-    </section>);
+    </section >);
 }
